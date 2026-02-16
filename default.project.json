@@ -1,0 +1,9 @@
+{
+	"name": "filoxen-luau",
+	"tree": {
+		"$path": "src",
+		"Packages": {
+			"$path": "Packages"
+		}
+	}
+}
