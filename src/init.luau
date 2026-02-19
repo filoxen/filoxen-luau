@@ -1,7 +1,7 @@
 local module = {}
 
 local HttpService = game:GetService("HttpService")
-local RbxAssetUtils = require(script.Packages.RbxAssetUtils)
+local RbxAssetUtils = require(script.Parent.RbxAssetUtils)
 local Types = RbxAssetUtils.Types
 
 local BASE_URL: string? = nil
