@@ -1,8 +1,8 @@
 [package]
 name = "secret-rare/filoxen-luau"
-version = "0.1.2"
+version = "0.1.3"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "server"
 
 [dependencies]
-RbxAssetUtils = "secret-rare/rbx-asset-utils@0.1.0"
+RbxAssetUtils = "secret-rare/rbx-asset-utils@0.2.0"
