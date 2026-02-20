@@ -24,7 +24,9 @@ jobs:
         uses: CompeyDev/setup-rokit@v0.1.2
 
       - name: login
-        run: wally login --token "${{ secrets.WALLY_TOKEN }}"
+        run: |
+          mkdir -p ~/.wally
+          echo '${{ secrets.WALLY_AUTH_TOML }}' > ~/.wally/auth.toml
 
       - name: publish
         run: wally publish
