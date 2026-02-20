@@ -24,10 +24,9 @@ jobs:
         uses: CompeyDev/setup-rokit@v0.1.2
 
       - name: login
-        shell: pwsh
         run: |
-          mkdir -p $env:USERPROFILE/.wally
-          echo '${{ secrets.WALLY_AUTH_TOML }}' > $env:USERPROFILE/.wally/auth.toml
+          mkdir -p ~/.wally
+          echo '${{ secrets.WALLY_AUTH_TOML }}' > ~/.wally/auth.toml
 
       - name: publish
         run: wally publish
