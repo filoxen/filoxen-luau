@@ -3,6 +3,7 @@ name = "secret-rare/filoxen-luau"
 version = "0.1.5"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "server"
+license = "MIT"
 
 [dependencies]
 RbxAssetUtils = "secret-rare/rbx-asset-utils@0.2.0"
