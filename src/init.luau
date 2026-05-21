@@ -50,7 +50,7 @@ local function makeApiRequest(url: string): {Types.Asset}?
 end
 
 -- Fetches random assets from the Filoxen API with the given filters.
-function module.random(assetTypeIds: {number | Enum.AssetType}, maxAssetId: number?, minAssetId: number?, batch: number, onsale: number | boolean?, playable: number?): {Types.Asset}?
+function module.random(assetTypeIds: {number | Enum.AssetType}, maxAssetId: number?, minAssetId: number?, batch: number, onsale: number | boolean?, playable: number?, gamePlayed: number?): {Types.Asset}?
 	local REQUEST_URL = `{BASE_URL}/assets/random?assetTypeIds={table.concat(assetTypeIds, ',')}&batch={batch}`
 	if type(onsale) == "boolean" then
 		onsale = if onsale then 1 else 0
@@ -72,6 +72,9 @@ function module.random(assetTypeIds: {number | Enum.AssetType}, maxAssetId: numb
 	if playable then
 		REQUEST_URL = `{REQUEST_URL}&playable={playable}`
 	end
+	if gamePlayed ~= nil then
+		REQUEST_URL = `{REQUEST_URL}&gamePlayed={gamePlayed}`
+	end
 	return makeApiRequest(REQUEST_URL)
 end
 
@@ -80,6 +83,28 @@ function module.search(query: string, assetTypeId: number, page: number?): {Type
 	if not page then page = 1 end
 	local REQUEST_URL = `{BASE_URL}/assets/search?assetTypeId={assetTypeId}&query={HttpService:UrlEncode(query)}&page={page}`
 	return makeApiRequest(REQUEST_URL)
+end
+
+-- Marks a place as played via PATCH /assets/id/:id/played.
+function module.markPlayed(assetId: number): boolean
+	assert(BASE_URL and API_KEY, "[Filoxen] Must call .configure() before using the API")
+	local url = `{BASE_URL}/assets/id/{assetId}/played`
+	local success, response = pcall(function()
+		return HttpService:RequestAsync({
+			Url = url,
+			Method = "PATCH",
+			Headers = {
+				["x-api-key"] = API_KEY
+			}
+		})
+	end)
+	if success and response.Success then
+		return true
+	else
+		local errorMessage = if success then `HTTP {response.StatusCode}: {response.StatusMessage}` else tostring(response)
+		warn(`[Filoxen] markPlayed failed: {errorMessage}`)
+		return false
+	end
 end
 
 return module

@@ -8,7 +8,7 @@ Requires [Wally](https://wally.run).
 
 ```toml
 [dependencies]
-Filoxen = "secret-rare/filoxen-luau@0.1.0"
+Filoxen = "secret-rare/filoxen-luau@0.1.6"
 ```
 
 ```sh
@@ -43,4 +43,3 @@ local assets = Filoxen.random(
 -- Search for assets by name
 local results = Filoxen.search("blue hat", Enum.AssetType.Hat.Value)
 ```
-
